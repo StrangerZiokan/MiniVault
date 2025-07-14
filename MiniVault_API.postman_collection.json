@@ -1,0 +1,467 @@
+{
+	"info": {
+		"_postman_id": "12345678-1234-1234-1234-123456789abc",
+		"name": "MiniVault API",
+		"description": "A comprehensive collection for testing the MiniVault API endpoints including streaming and non-streaming responses.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Health & Info",
+			"item": [
+				{
+					"name": "Root - API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Get basic API information and available endpoints."
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check API health status and Ollama connectivity."
+					},
+					"response": []
+				}
+			],
+			"description": "Basic health and information endpoints."
+		},
+		{
+			"name": "Text Generation",
+			"item": [
+				{
+					"name": "Generate Response (Non-Streaming)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Explain quantum computing in simple terms\",\n  \"model\": \"llama2\",\n  \"stream\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Generate a complete response without streaming."
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Response (Streaming)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Write a short story about a robot learning to paint\",\n  \"model\": \"llama2\",\n  \"stream\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Generate a streaming response token-by-token. Watch the response come in real-time!"
+					},
+					"response": []
+				},
+				{
+					"name": "Simple Question (Default Model)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"What is the capital of France?\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Simple question using default model and settings."
+					},
+					"response": []
+				},
+				{
+					"name": "Code Generation Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Write a Python function to calculate the factorial of a number using recursion. Include comments and error handling.\",\n  \"model\": \"codellama\",\n  \"stream\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Request code generation with a specific model (codellama)."
+					},
+					"response": []
+				},
+				{
+					"name": "Long Form Content (Streaming)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Write a detailed explanation of machine learning, covering supervised learning, unsupervised learning, and deep learning. Include examples and use cases.\",\n  \"stream\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Generate long-form content with streaming to see tokens appear in real-time."
+					},
+					"response": []
+				}
+			],
+			"description": "Text generation endpoints with various examples."
+		},
+		{
+			"name": "Logging & Analytics",
+			"item": [
+				{
+					"name": "Get Recent Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/logs/recent?limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logs",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "Number of recent logs to retrieve"
+								}
+							]
+						},
+						"description": "Retrieve recent interaction logs."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Recent Logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/logs/recent?limit=50",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logs",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "50"
+								}
+							]
+						},
+						"description": "Retrieve more interaction logs for analysis."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Log Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/logs/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logs",
+								"stats"
+							]
+						},
+						"description": "Get interaction statistics and analytics."
+					},
+					"response": []
+				}
+			],
+			"description": "Logging and analytics endpoints."
+		},
+		{
+			"name": "Error Testing",
+			"item": [
+				{
+					"name": "Invalid Request (Empty Prompt)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"\",\n  \"model\": \"llama2\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Test validation with empty prompt."
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Request (No Prompt)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"model\": \"llama2\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Test validation with missing prompt field."
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existent Model",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Hello, world!\",\n  \"model\": \"non-existent-model\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Test fallback behavior with non-existent model."
+					},
+					"response": []
+				}
+			],
+			"description": "Error testing and edge cases."
+		},
+		{
+			"name": "Performance Testing",
+			"item": [
+				{
+					"name": "Quick Response Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Hi\",\n  \"stream\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Test response time with a very short prompt."
+					},
+					"response": []
+				},
+				{
+					"name": "Long Prompt Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"prompt\": \"Please provide a comprehensive analysis of the following topics: artificial intelligence, machine learning, deep learning, neural networks, natural language processing, computer vision, robotics, and their applications in healthcare, finance, transportation, and education. Include current trends, challenges, and future prospects for each field.\",\n  \"stream\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate"
+							]
+						},
+						"description": "Test with a long, complex prompt using streaming."
+					},
+					"response": []
+				}
+			],
+			"description": "Performance and load testing requests."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set timestamp for requests",
+					"pm.globals.set('timestamp', new Date().toISOString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Basic response validation",
+					"pm.test('Response status code is successful', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+					"});",
+					"",
+					"// Response time check",
+					"pm.test('Response time is reasonable', function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(30000); // 30 seconds max",
+					"});",
+					"",
+					"// Content-Type validation for JSON responses",
+					"if (pm.response.headers.get('Content-Type') && pm.response.headers.get('Content-Type').includes('application/json')) {",
+					"    pm.test('Response is valid JSON', function () {",
+					"        pm.response.to.have.jsonBody();",
+					"    });",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string",
+			"description": "Base URL for the MiniVault API"
+		},
+		{
+			"key": "api_version",
+			"value": "1.0.0",
+			"type": "string",
+			"description": "API version"
+		}
+	]
+}
